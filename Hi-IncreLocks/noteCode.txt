@@ -1,0 +1,54 @@
+-(void)configAutolayOut
+{
+
+CGSize applicationSize = [UIScreen mainScreen].bounds.size;
+CGFloat previewWidth = applicationSize.width - kPreviewMarginLeft * 2.0;
+CGFloat previewHeight = previewWidth * applicationSize.height / applicationSize.width;
+[self.view addSubview:self.icarouselView];
+
+
+self.imvOverlay.image = [UIImage imageNamed:@"a.png"];
+[self.icarouselView addSubview:self.imvOverlay];
+
+
+//    self.icarouselView.backgroundColor = [UIColor orangeColor];
+//    self.imvOverlay.frame = CGRectMake(60, 60, previewHeight, previewHeight);
+//        UIEdgeInsets padding = UIEdgeInsetsMake(0, kPreviewMarginTop, self.view.frame.size.width, previewHeight);
+
+float paddingBottom = applicationSize.height - previewHeight - kPreviewMarginTop;
+UIEdgeInsets paddingOverlay = UIEdgeInsetsMake(kPreviewMarginTop, kPreviewMarginLeft,paddingBottom, kPreviewMarginLeft);
+UIEdgeInsets padding = UIEdgeInsetsMake(kPreviewMarginTop, 0,paddingBottom, 0);
+//
+//    if (IS_IPHONE_6_PLUS || IS_IPHONE_4) {
+
+
+[self.imvOverlay mas_makeConstraints:^(MASConstraintMaker *make) {
+make.top.equalTo(self.view.mas_top).with.offset(paddingOverlay.top); //with is an optional semantic filler
+make.left.equalTo(self.view.mas_left).with.offset(paddingOverlay.left);
+make.bottom.equalTo(self.view.mas_bottom).with.offset(-paddingOverlay.bottom);
+make.right.equalTo(self.view.mas_right).with.offset(-paddingOverlay.right);
+}];
+[self.icarouselView mas_makeConstraints:^(MASConstraintMaker *make) {
+make.top.equalTo(self.view.mas_top).with.offset(padding.top); //with is an optional semantic filler
+make.left.equalTo(self.view.mas_left).with.offset(padding.left);
+make.bottom.equalTo(self.view.mas_bottom).with.offset(-padding.bottom);
+make.right.equalTo(self.view.mas_right).with.offset(-padding.right);
+}];
+//    }else
+//    {
+//        [self.icarouselView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view.mas_top).with.offset(padding.top); //with is an optional semantic filler
+//            make.left.equalTo(self.view.mas_left).with.offset(padding.left);
+//            make.bottom.equalTo(self.view.mas_bottom).with.offset(-padding.bottom);
+//            make.right.equalTo(self.view.mas_right).with.offset(-padding.right);
+//        }];
+//        [self.imvOverlay mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view.mas_top).with.offset(paddingOverlay.top); //with is an optional semantic filler
+//            make.left.equalTo(self.view.mas_left).with.offset(paddingOverlay.left);
+//            make.bottom.equalTo(self.view.mas_bottom).with.offset(-paddingOverlay.bottom);
+//            make.right.equalTo(self.view.mas_right).with.offset(-paddingOverlay.right);
+//        }];
+//
+//    }
+
+}
